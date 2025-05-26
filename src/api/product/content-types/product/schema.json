@@ -28,6 +28,9 @@
       "required": true,
       "allowedTypes": ["images"]
     },
+    "imageUrl": {
+      "type": "string"
+    },
     "rating": {
       "type": "decimal",
       "min": 0,

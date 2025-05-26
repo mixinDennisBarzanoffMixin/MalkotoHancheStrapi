@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-05-26T18:13:06.210Z"
+    "x-generation-date": "2025-05-26T18:33:30.170Z"
   },
   "servers": [
     {
@@ -6141,6 +6141,9 @@
                                   }
                                 }
                               },
+                              "imageUrl": {
+                                "type": "string"
+                              },
                               "rating": {
                                 "type": "number",
                                 "format": "float"
@@ -7931,6 +7934,9 @@
                               }
                             }
                           },
+                          "imageUrl": {
+                            "type": "string"
+                          },
                           "rating": {
                             "type": "number",
                             "format": "float"
@@ -9639,6 +9645,9 @@
                               }
                             }
                           },
+                          "imageUrl": {
+                            "type": "string"
+                          },
                           "rating": {
                             "type": "number",
                             "format": "float"
@@ -11077,6 +11086,9 @@
                 ],
                 "example": "string or id"
               },
+              "imageUrl": {
+                "type": "string"
+              },
               "rating": {
                 "type": "number",
                 "format": "float"
@@ -11785,6 +11797,9 @@
                 }
               }
             }
+          },
+          "imageUrl": {
+            "type": "string"
           },
           "rating": {
             "type": "number",
@@ -12546,6 +12561,9 @@
                           }
                         }
                       }
+                    },
+                    "imageUrl": {
+                      "type": "string"
                     },
                     "rating": {
                       "type": "number",
