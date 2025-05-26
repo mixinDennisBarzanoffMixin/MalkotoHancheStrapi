@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-05-22T17:55:32.995Z"
+    "x-generation-date": "2025-05-26T18:13:06.210Z"
   },
   "servers": [
     {
@@ -6168,7 +6168,9 @@
                               "storage": {
                                 "type": "string"
                               },
-                              "nutritionFacts": {},
+                              "nutritionFacts": {
+                                "$ref": "#/components/schemas/SharedNutritionFactComponent"
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -6511,6 +6513,34 @@
           },
           "meta": {
             "type": "object"
+          }
+        }
+      },
+      "SharedNutritionFactComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "calories": {
+            "type": "number",
+            "format": "float"
+          },
+          "protein": {
+            "type": "number",
+            "format": "float"
+          },
+          "carbs": {
+            "type": "number",
+            "format": "float"
+          },
+          "fat": {
+            "type": "number",
+            "format": "float"
+          },
+          "fiber": {
+            "type": "number",
+            "format": "float"
           }
         }
       },
@@ -7928,7 +7958,9 @@
                           "storage": {
                             "type": "string"
                           },
-                          "nutritionFacts": {},
+                          "nutritionFacts": {
+                            "$ref": "#/components/schemas/SharedNutritionFactComponent"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -9634,7 +9666,9 @@
                           "storage": {
                             "type": "string"
                           },
-                          "nutritionFacts": {},
+                          "nutritionFacts": {
+                            "$ref": "#/components/schemas/SharedNutritionFactComponent"
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -11070,7 +11104,9 @@
               "storage": {
                 "type": "string"
               },
-              "nutritionFacts": {},
+              "nutritionFacts": {
+                "$ref": "#/components/schemas/SharedNutritionFactComponent"
+              },
               "locale": {
                 "type": "string"
               },
@@ -12538,7 +12574,9 @@
                     "storage": {
                       "type": "string"
                     },
-                    "nutritionFacts": {},
+                    "nutritionFacts": {
+                      "$ref": "#/components/schemas/SharedNutritionFactComponent"
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -12658,7 +12696,9 @@
           "storage": {
             "type": "string"
           },
-          "nutritionFacts": {},
+          "nutritionFacts": {
+            "$ref": "#/components/schemas/SharedNutritionFactComponent"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"

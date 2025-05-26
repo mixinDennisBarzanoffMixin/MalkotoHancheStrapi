@@ -11,6 +11,21 @@ export interface SharedMedia extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedNutritionFact extends Struct.ComponentSchema {
+  collectionName: 'components_shared_nutrition_facts';
+  info: {
+    displayName: 'Nutrition Fact';
+    icon: 'apple-alt';
+  };
+  attributes: {
+    calories: Schema.Attribute.Decimal;
+    carbs: Schema.Attribute.Decimal;
+    fat: Schema.Attribute.Decimal;
+    fiber: Schema.Attribute.Decimal;
+    protein: Schema.Attribute.Decimal;
+  };
+}
+
 export interface SharedQuote extends Struct.ComponentSchema {
   collectionName: 'components_shared_quotes';
   info: {
@@ -66,6 +81,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.media': SharedMedia;
+      'shared.nutrition-fact': SharedNutritionFact;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;

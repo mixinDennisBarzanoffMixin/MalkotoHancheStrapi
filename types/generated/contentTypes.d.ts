@@ -563,7 +563,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    nutritionFacts: Schema.Attribute.JSON;
+    nutritionFacts: Schema.Attribute.Component<'shared.nutrition-fact', false>;
     oldPrice: Schema.Attribute.Decimal;
     origin: Schema.Attribute.String;
     price: Schema.Attribute.Decimal & Schema.Attribute.Required;

@@ -1,0 +1,26 @@
+{
+    "collectionName": "components_shared_nutrition_facts",
+    "info": {
+      "displayName": "Nutrition Fact",
+      "icon": "apple-alt"
+    },
+    "options": {},
+    "attributes": {
+      "calories": {
+        "type": "decimal"
+      },
+      "protein": {
+        "type": "decimal"
+      },
+      "carbs": {
+        "type": "decimal"
+      },
+      "fat": {
+        "type": "decimal"
+      },
+      "fiber": {
+        "type": "decimal"
+      }
+    }
+  }
+  
