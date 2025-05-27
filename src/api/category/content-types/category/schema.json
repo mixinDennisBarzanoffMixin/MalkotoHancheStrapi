@@ -33,6 +33,18 @@
       "multiple": false,
       "allowedTypes": ["images"]
     },
+    "parentCategory": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "subcategories"
+    },
+    "subcategories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "parentCategory"
+    },
     "articles": {
       "type": "relation",
       "relation": "oneToMany",
@@ -41,9 +53,9 @@
     },
     "products": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::product.product",
-      "mappedBy": "category"
+      "inversedBy": "categories"
     }
   }
 }
