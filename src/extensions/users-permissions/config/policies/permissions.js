@@ -7,22 +7,31 @@ module.exports = async (ctx, next) => {
   });
 
   if (publicRole) {
-    const permissions = await strapi.query('plugin::users-permissions.permission').findMany({
-      where: { role: publicRole.id },
+    // Explicitly check for specific permissions
+    const requiredPermissions = [
+      'api::product.product.find',
+      'api::product.product.findOne',
+      'api::category.category.find',
+      'api::category.category.findOne'
+    ];
+
+    const existingPermissions = await strapi.query('plugin::users-permissions.permission').findMany({
+      where: { 
+        role: publicRole.id,
+        action: { $in: requiredPermissions }
+      },
     });
 
-    // Add product permissions if they don't exist
-    const productPermissions = permissions.filter(p => p.controller === 'product');
-    if (productPermissions.length === 0) {
+    // Create missing permissions
+    const existingActions = existingPermissions.map(p => p.action);
+    console.log(existingActions);
+    const missingPermissions = requiredPermissions.filter(action => !existingActions.includes(action));
+    console.log(missingPermissions);
+
+    for (const action of missingPermissions) {
       await strapi.query('plugin::users-permissions.permission').create({
         data: {
-          action: 'api::product.product.find',
-          role: publicRole.id,
-        },
-      });
-      await strapi.query('plugin::users-permissions.permission').create({
-        data: {
-          action: 'api::product.product.findOne',
+          action,
           role: publicRole.id,
         },
       });
