@@ -11,6 +11,10 @@
     "draftAndPublish": true
   },
   "attributes": {
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
     "name": {
       "type": "string",
       "required": true
