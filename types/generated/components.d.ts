@@ -1,5 +1,69 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface RecipeIngredient extends Struct.ComponentSchema {
+  collectionName: 'components_recipe_ingredients';
+  info: {
+    description: 'Recipe ingredient with quantity and unit';
+    displayName: 'Ingredient';
+    icon: 'carrot';
+  };
+  attributes: {
+    isOptional: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    quantity: Schema.Attribute.String & Schema.Attribute.Required;
+    unit: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface RecipeStep extends Struct.ComponentSchema {
+  collectionName: 'components_recipe_steps';
+  info: {
+    description: 'Recipe preparation step';
+    displayName: 'Step';
+    icon: 'list-ol';
+  };
+  attributes: {
+    duration: Schema.Attribute.String;
+    instruction: Schema.Attribute.Text & Schema.Attribute.Required;
+    stepNumber: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    temperature: Schema.Attribute.String;
+  };
+}
+
+export interface RecipeTag extends Struct.ComponentSchema {
+  collectionName: 'components_recipe_tags';
+  info: {
+    description: 'Recipe tag';
+    displayName: 'Tag';
+    icon: 'tag';
+  };
+  attributes: {
+    name: Schema.Attribute.Enumeration<
+      [
+        '\u0441\u0430\u043B\u0430\u0442\u0438',
+        '\u0432\u0435\u0433\u0435\u0442\u0430\u0440\u0438\u0430\u043D\u0441\u043A\u043E',
+        '\u043B\u0435\u0441\u043D\u043E',
+        '\u0441\u0443\u043F\u0438',
+        '\u043F\u0438\u043B\u0435\u0448\u043A\u043E',
+        '\u0434\u0435\u0441\u0435\u0440\u0442\u0438',
+        '\u0437\u0430\u043A\u0443\u0441\u043A\u0438',
+        '\u043E\u0441\u043D\u043E\u0432\u043D\u043E',
+        '\u0431\u044A\u0440\u0437\u043E',
+        '\u0437\u0434\u0440\u0430\u0432\u043E\u0441\u043B\u043E\u0432\u043D\u043E',
+      ]
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -80,6 +144,9 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'recipe.ingredient': RecipeIngredient;
+      'recipe.step': RecipeStep;
+      'recipe.tag': RecipeTag;
       'shared.media': SharedMedia;
       'shared.nutrition-fact': SharedNutritionFact;
       'shared.quote': SharedQuote;

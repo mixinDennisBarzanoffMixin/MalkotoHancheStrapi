@@ -12,7 +12,9 @@ module.exports = async (ctx, next) => {
       'api::product.product.find',
       'api::product.product.findOne',
       'api::category.category.find',
-      'api::category.category.findOne'
+      'api::category.category.findOne',
+      'api::recipe.recipes.find',
+      'api::recipe.recipesfindOne',
     ];
 
     const existingPermissions = await strapi.query('plugin::users-permissions.permission').findMany({

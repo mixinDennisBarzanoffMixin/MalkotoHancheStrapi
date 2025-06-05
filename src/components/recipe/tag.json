@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_recipe_tags",
+  "info": {
+    "displayName": "Tag",
+    "icon": "tag",
+    "description": "Recipe tag"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "enumeration",
+      "enum": [
+        "салати",
+        "вегетарианско",
+        "лесно",
+        "супи",
+        "пилешко",
+        "десерти",
+        "закуски",
+        "основно",
+        "бързо",
+        "здравословно"
+      ],
+      "required": true
+    }
+  }
+} 

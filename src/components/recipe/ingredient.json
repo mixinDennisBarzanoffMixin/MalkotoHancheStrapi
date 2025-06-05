@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_recipe_ingredients",
+  "info": {
+    "displayName": "Ingredient",
+    "icon": "carrot",
+    "description": "Recipe ingredient with quantity and unit"
+  },
+  "options": {},
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "quantity": {
+      "type": "string",
+      "required": true
+    },
+    "unit": {
+      "type": "string",
+      "required": true
+    },
+    "isOptional": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+} 

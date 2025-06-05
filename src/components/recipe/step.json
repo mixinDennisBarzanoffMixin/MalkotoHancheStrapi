@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_recipe_steps",
+  "info": {
+    "displayName": "Step",
+    "icon": "list-ol",
+    "description": "Recipe preparation step"
+  },
+  "options": {},
+  "attributes": {
+    "stepNumber": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "instruction": {
+      "type": "text",
+      "required": true
+    },
+    "duration": {
+      "type": "string"
+    },
+    "temperature": {
+      "type": "string"
+    }
+  }
+} 

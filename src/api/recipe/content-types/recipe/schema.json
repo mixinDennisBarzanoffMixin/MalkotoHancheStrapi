@@ -1,0 +1,107 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipes",
+  "info": {
+    "singularName": "recipe",
+    "pluralName": "recipes",
+    "displayName": "Recipe",
+    "description": "Cooking recipes with ingredients and steps"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "difficulty": {
+      "type": "enumeration",
+      "enum": ["easy", "medium", "hard"],
+      "required": true
+    },
+    "prepTime": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "cookTime": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "servings": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "rating": {
+      "type": "decimal",
+      "min": 0,
+      "max": 5
+    },
+    "reviewCount": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["videos"]
+    },
+    "videoUrl": {
+      "type": "string",
+      "description": "External video URL (e.g. YouTube, Vimeo)"
+    },
+    "author": {
+      "type": "string",
+      "required": true
+    },
+    "tags": {
+      "type": "component",
+      "component": "recipe.tag",
+      "repeatable": true
+    },
+    "cuisine": {
+      "type": "string"
+    },
+    "mealType": {
+      "type": "enumeration",
+      "enum": ["breakfast", "lunch", "dinner", "snack", "dessert"],
+      "required": true
+    },
+    "ingredients": {
+      "type": "component",
+      "component": "recipe.ingredient",
+      "required": true,
+      "repeatable": true,
+      "min": 1
+    },
+    "steps": {
+      "type": "component",
+      "component": "recipe.step",
+      "required": true,
+      "repeatable": true,
+      "min": 1
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+} 
