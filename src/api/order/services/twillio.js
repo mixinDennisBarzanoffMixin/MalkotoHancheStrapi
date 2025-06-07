@@ -1,4 +1,4 @@
-async function sendTwillio(order) {
+async function sendTwillio(order, toNumber) {
     // Twilio Integration
     try {
       const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -13,7 +13,6 @@ async function sendTwillio(order) {
       }
 
       const client = require('twilio')(accountSid, authToken);
-      const toNumber = '+491729361855';
 
       // Erstelle TwiML für den Anruf
       const twiml = `

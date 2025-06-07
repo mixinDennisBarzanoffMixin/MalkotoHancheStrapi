@@ -1,6 +1,6 @@
-async function sendOwnerEmail(order) {
+async function sendOwnerEmail(order, ownerEmail) {
     await strapi.plugins['email'].services.email.send({
-      to: 'denis.barzanov2002@gmail.com',
+      to: ownerEmail,
       from: process.env.AWS_SES_FROM,
       subject: `Поръчка номер ${order.orderNumber}`,
       text: `Преглед на вашата поръчка!\n\nПоръчка номер: ${order.orderNumber}\nОбща сума: ${order.totalAmount}€`,
@@ -62,7 +62,7 @@ async function sendOwnerEmail(order) {
                 const product = item.product;
                 const regularPrice = product.price;
                 const hasDiscount = product.oldPrice && product.oldPrice > regularPrice;
-                const currentPrice = hasDiscount ? regularPrice : product.oldPrice;
+                const currentPrice = regularPrice;
                 const itemTotal = currentPrice * item.quantity;
 
                 return `
