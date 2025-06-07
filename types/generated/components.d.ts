@@ -1,5 +1,39 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface OrderOrderItem extends Struct.ComponentSchema {
+  collectionName: 'components_order_items';
+  info: {
+    description: 'Individual item in an order';
+    displayName: 'Order Item';
+    icon: 'shopping-cart';
+  };
+  attributes: {
+    priceAtTime: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    quantity: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+  };
+}
+
+export interface OrderShippingAddress extends Struct.ComponentSchema {
+  collectionName: 'components_order_shipping_addresses';
+  info: {
+    description: 'Delivery address for an order';
+    displayName: 'Shipping Address';
+    icon: 'map-marker-alt';
+  };
+  attributes: {
+    city: Schema.Attribute.String & Schema.Attribute.Required;
+    streetAddress: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface RecipeIngredient extends Struct.ComponentSchema {
   collectionName: 'components_recipe_ingredients';
   info: {
@@ -144,6 +178,8 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'order.order-item': OrderOrderItem;
+      'order.shipping-address': OrderShippingAddress;
       'recipe.ingredient': RecipeIngredient;
       'recipe.step': RecipeStep;
       'recipe.tag': RecipeTag;

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_order_shipping_addresses",
+  "info": {
+    "displayName": "Shipping Address",
+    "icon": "map-marker-alt",
+    "description": "Delivery address for an order"
+  },
+  "options": {},
+  "attributes": {
+    "streetAddress": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    }
+  }
+} 

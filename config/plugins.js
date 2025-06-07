@@ -1,4 +1,4 @@
-module.exports = () => ({
+module.exports = ({ env }) => ({
   'documentation': {
     enabled: true,
     config: {
@@ -14,6 +14,20 @@ module.exports = () => ({
           description: 'Development server',
         },
       ],
+    },
+  },
+  email: {
+    config: {
+      provider: '@strapi/provider-email-amazon-ses',
+      providerOptions: {
+        key: env('AWS_SES_KEY'),
+        secret: env('AWS_SES_SECRET'),
+        amazon: `https://email.${env('AWS_SES_REGION', 'eu-west-1')}.amazonaws.com`,
+      },
+      settings: {
+        defaultFrom: env('AWS_SES_FROM'),
+        defaultReplyTo: env('AWS_SES_REPLY_TO'),
+      },
     },
   },
 });
