@@ -203,7 +203,7 @@ async function sendCustomerEmail(order) {
 
               <!-- CTA Button -->
               <div style="text-align: center; margin-top: 30px;">
-                <a href="https://supermarket.bg" style="display: inline-block; background-color: #b91c1c; color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600;">
+                <a href="https://malkotohanche.com" style="display: inline-block; background-color: #b91c1c; color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600;">
                   🛒 Продължи пазаруването
                 </a>
               </div>
