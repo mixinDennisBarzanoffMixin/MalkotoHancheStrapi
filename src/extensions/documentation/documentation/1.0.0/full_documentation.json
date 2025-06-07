@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-06-07T00:06:05.604Z"
+    "x-generation-date": "2025-06-07T00:59:06.527Z"
   },
   "servers": [
     {
@@ -12046,7 +12046,8 @@
               "items",
               "totalAmount",
               "shippingAddress",
-              "phoneNumber"
+              "phoneNumber",
+              "shippingCost"
             ],
             "type": "object",
             "properties": {
@@ -12064,6 +12065,13 @@
                 ],
                 "example": "string or id"
               },
+              "customerEmail": {
+                "type": "string",
+                "format": "email"
+              },
+              "deliveryNotes": {
+                "type": "string"
+              },
               "items": {
                 "type": "array",
                 "items": {
@@ -12079,6 +12087,10 @@
               },
               "phoneNumber": {
                 "type": "string"
+              },
+              "shippingCost": {
+                "type": "number",
+                "format": "float"
               },
               "locale": {
                 "type": "string"
@@ -12143,7 +12155,8 @@
           "items",
           "totalAmount",
           "shippingAddress",
-          "phoneNumber"
+          "phoneNumber",
+          "shippingCost"
         ],
         "properties": {
           "id": {
@@ -12655,6 +12668,13 @@
               }
             }
           },
+          "customerEmail": {
+            "type": "string",
+            "format": "email"
+          },
+          "deliveryNotes": {
+            "type": "string"
+          },
           "items": {
             "type": "array",
             "items": {
@@ -12670,6 +12690,10 @@
           },
           "phoneNumber": {
             "type": "string"
+          },
+          "shippingCost": {
+            "type": "number",
+            "format": "float"
           },
           "createdAt": {
             "type": "string",
@@ -12733,6 +12757,13 @@
                     }
                   }
                 },
+                "customerEmail": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "deliveryNotes": {
+                  "type": "string"
+                },
                 "items": {
                   "type": "array",
                   "items": {
@@ -12748,6 +12779,10 @@
                 },
                 "phoneNumber": {
                   "type": "string"
+                },
+                "shippingCost": {
+                  "type": "number",
+                  "format": "float"
                 },
                 "createdAt": {
                   "type": "string",

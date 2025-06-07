@@ -13,7 +13,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 
     // Berechne Gesamtbetrag und Versandkosten
     let totalAmount = 0;
-    const shippingCost = 5.99; // Basis-Versandkosten
 
     // Hole aktuelle Produktpreise und berechne Gesamtsumme
     for (const item of data.items) {
@@ -26,6 +25,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
       totalAmount += product.price * item.quantity;
       item.priceAtTime = product.price;
     }
+    const shippingCost = totalAmount > 80 ? 0 : 4; // Basis-Versandkosten
 
     // Generiere eindeutige Bestellnummer
     const orderNumber = 'ORD-' + Date.now();
@@ -40,8 +40,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         shippingCost,
         status: 'pending',
         customer: ctx.state.user?.id,
-        email: data.email || 'denis.barzanov2002@gmail.com',
-        phoneNumber: data.phoneNumber || '+491729361855',
+        customerEmail: data.customerEmail,
+        phoneNumber: data.phoneNumber,
         publishedAt: new Date()
       },
       populate: {

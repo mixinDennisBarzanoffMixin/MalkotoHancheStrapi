@@ -569,6 +569,8 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    customerEmail: Schema.Attribute.Email;
+    deliveryNotes: Schema.Attribute.Text;
     items: Schema.Attribute.Component<'order.order-item', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
@@ -590,6 +592,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       false
     > &
       Schema.Attribute.Required;
+    shippingCost: Schema.Attribute.Decimal & Schema.Attribute.Required;
     totalAmount: Schema.Attribute.Decimal & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

@@ -22,6 +22,14 @@
       "target": "plugin::users-permissions.user",
       "required": false
     },
+    "customerEmail": {
+      "type": "email",
+      "required": false
+    },
+    "deliveryNotes": {
+      "type": "text",
+      "required": false
+    },
     "items": {
       "type": "component",
       "component": "order.order-item",
@@ -40,6 +48,10 @@
     },
     "phoneNumber": {
       "type": "string",
+      "required": true
+    },
+    "shippingCost": {
+      "type": "decimal",
       "required": true
     }
   }
