@@ -4,13 +4,12 @@
   "private": true,
   "description": "A Strapi application",
   "scripts": {
-    "build": "strapi build",
+    "build": "echo 'Rebuilding @swc/core!!!' && npm rebuild @swc/core && strapi build",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
-    "strapi": "strapi",
-    "postinstall": "npm rebuild @swc/core"
+    "strapi": "strapi"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.16.0",
