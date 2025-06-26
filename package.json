@@ -9,7 +9,8 @@
     "develop": "strapi develop",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "postinstall": "npm rebuild @swc/core"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.16.0",
@@ -29,7 +30,7 @@
     "twilio": "^5.7.0"
   },
   "engines": {
-    "node": ">=18.0.0 <=22.x.x",
+    "node": ">=20.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   }
 }
