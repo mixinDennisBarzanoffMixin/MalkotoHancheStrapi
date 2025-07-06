@@ -1,0 +1,12 @@
+version: '3'
+services:
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./strapi-cloud-template-blog-4ca0014f37/.env
+    ports:
+      - '1337:1337'
