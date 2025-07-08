@@ -8,5 +8,8 @@ module.exports = (config) => {
         '@': '/src',
       },
     },
+    server: {
+      allowedHosts: ["malkotohanche-api.omniscripts.eu"],
+    },
   });
 };
