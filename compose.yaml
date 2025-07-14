@@ -10,4 +10,4 @@ services:
     env_file:
       - .env
     ports:
-      - '1337:1338'
+      - '1338:1337'
