@@ -2,18 +2,20 @@ FROM node:22
 
 WORKDIR /srv/app
 
-# Copy package files
+# Copy only package files first — this is the most cacheable layer
 COPY package*.json ./
 
-# Install dependencies
+# Install ALL dependencies in one step
 RUN npm install
-RUN npm install better-sqlite3 --save
 
-# Copy application files
+# Now copy the rest of your app
 COPY . .
 
+# Expose port
 EXPOSE 1337
 
+# Build the project
 RUN npm run build
 
-CMD ["npm", "run", "start"] 
+# Start the app
+CMD ["npm", "run", "start"]
