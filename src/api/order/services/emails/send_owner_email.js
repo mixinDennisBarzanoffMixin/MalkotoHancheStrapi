@@ -69,7 +69,7 @@ async function sendOwnerEmail(order, ownerEmail) {
                   <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 15px; background-color: #ffffff;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
                       ${product.image?.formats?.thumbnail ? `
-                        <img src="https://unwavering-hug-c09b1ff94a.strapiapp.com${product.image.formats.thumbnail.url}" 
+                        <img src="https://admin.malkotohanche.com${product.image.formats.thumbnail.url}" 
                              alt="${product.name}" 
                              style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; margin-right: 15px;"
                         />
