@@ -29,6 +29,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 
     // Generiere eindeutige Bestellnummer
     const orderNumber = 'ORD-' + Date.now();
+    const deliveryNotes = data.deliveryNotes;
 
     // Erstelle die Bestellung
     const order = await strapi.entityService.create('api::order.order', {
@@ -42,7 +43,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         customer: ctx.state.user?.id,
         customerEmail: data.customerEmail,
         phoneNumber: data.phoneNumber,
-        publishedAt: new Date()
+        publishedAt: new Date(),
+        deliveryNotes: deliveryNotes
       },
       populate: {
         items: {
