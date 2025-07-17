@@ -102,7 +102,7 @@ async function sendOwnerEmail(order, ownerEmail) {
                       ` : ''}
                     </div>
 
-                    <a href="https://unwavering-hug-c09b1ff94a.strapiapp.com/admin/content-manager/collectionType/api::product.product/${product.documentId}"
+                    <a href="https://admin.malkotohanche.com/admin/content-manager/collectionType/api::product.product/${product.documentId}"
                        style="display: inline-block; background-color: #1d4ed8; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 500;"
                        target="_blank">
                       📝 Отвори в админ панела
@@ -171,13 +171,13 @@ async function sendOwnerEmail(order, ownerEmail) {
 
               <!-- Action Links -->
               <div style="text-align: center; margin-top: 30px;">
-                <a href="https://unwavering-hug-c09b1ff94a.strapiapp.com/admin/content-manager/collectionType/api::order.order"
+                <a href="https://admin.malkotohanche.com/admin/content-manager/collectionType/api::order.order"
                    style="display: inline-block; background-color: #059669; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 500; margin-right: 15px;"
                    target="_blank">
                   📊 Виж всички поръчки
                 </a>
                 
-                <a href="https://unwavering-hug-c09b1ff94a.strapiapp.com/admin/content-manager/collection-types/api::product.product"
+                <a href="https://admin.malkotohanche.com/admin/content-manager/collection-types/api::product.product"
                    style="display: inline-block; background-color: #7c3aed; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 500;"
                    target="_blank">
                   🛍️ Управление на продукти
