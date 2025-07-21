@@ -8,13 +8,41 @@
 
 module.exports = (config, { strapi }) => {
   return async (ctx, next) => {
-    strapi.log.debug('URL transformer middleware starting');
+    strapi.log.debug('URL transformer middleware starting for path:', ctx.path);
     
     await next();
+
+    // Only apply to API endpoints (not admin UI, uploads, etc.)
+    if (!ctx.path.startsWith('/api/')) {
+      strapi.log.debug('Skipping transformation - not an API endpoint');
+      return;
+    }
 
     // Only transform for successful responses with JSON content
     if (ctx.status < 200 || ctx.status >= 300 || !ctx.body) {
       strapi.log.debug('Skipping transformation - invalid response status or empty body');
+      return;
+    }
+
+    // Skip transformation for non-JSON responses (streams, HTML, etc.)
+    const contentType = ctx.response.header['content-type'] || '';
+    if (!contentType.includes('application/json')) {
+      strapi.log.debug('Skipping transformation - not JSON response, content-type:', contentType);
+      return;
+    }
+
+    // Skip transformation for streams and file objects
+    if (ctx.body && typeof ctx.body === 'object') {
+      // Check if it's a readable stream or file-like object
+      if (ctx.body.readable || ctx.body._readableState || ctx.body.fd !== undefined) {
+        strapi.log.debug('Skipping transformation - detected stream or file object');
+        return;
+      }
+    }
+
+    // Additional safety check - ensure we have a plain object or array
+    if (typeof ctx.body !== 'object' || ctx.body === null) {
+      strapi.log.debug('Skipping transformation - body is not an object');
       return;
     }
 
