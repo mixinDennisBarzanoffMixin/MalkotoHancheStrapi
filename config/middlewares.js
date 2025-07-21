@@ -14,6 +14,7 @@ module.exports = ({ env }) => ([
             'blob:',
             'dl.airtable.com',
             env('S3_ENDPOINT'),
+            env('FILE_SERVER_PUBLIC_URL'),
           ],
           'media-src': [
             "'self'",
@@ -21,6 +22,7 @@ module.exports = ({ env }) => ([
             'blob:',
             'dl.airtable.com',
             env('S3_ENDPOINT'),
+            env('FILE_SERVER_PUBLIC_URL'),
           ],
           upgradeInsecureRequests: null,
         },
@@ -34,5 +36,7 @@ module.exports = ({ env }) => ([
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
+  // Custom middleware for URL transformation
+  'global::url-transformer',
   'strapi::public',
 ]);

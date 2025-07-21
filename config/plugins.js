@@ -8,7 +8,8 @@ module.exports = ({ env }) => ({
             accessKeyId: env('S3_ACCESS_KEY'),
             secretAccessKey: env('S3_ACCESS_SECRET'),
           },
-          endpoint: env('S3_ENDPOINT'),
+          // Use private endpoint for backend operations (no egress fees)
+          endpoint: env('S3_ENDPOINT_PRIVATE'),
           region: env('S3_REGION'),
           params: {
             Bucket: env('S3_BUCKET'),
