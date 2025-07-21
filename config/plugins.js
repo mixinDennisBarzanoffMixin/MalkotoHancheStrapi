@@ -1,32 +1,20 @@
 module.exports = ({ env }) => ({
-  'documentation': {
-    enabled: true,
+  upload: {
     config: {
-      openapi: '3.0.0',
-      info: {
-        version: '1.0.0',
-        title: 'Strapi API Documentation',
-        description: 'Documentation for the Strapi API',
-      },
-      servers: [
-        {
-          url: 'http://localhost:1337',
-          description: 'Development server',
-        },
-      ],
-    },
-  },
-  email: {
-    config: {
-      provider: '@strapi/provider-email-amazon-ses',
+      provider: 'aws-s3',
       providerOptions: {
-        key: env('AWS_SES_KEY'),
-        secret: env('AWS_SES_SECRET'),
-        amazon: `https://email.${env('AWS_SES_REGION', 'eu-west-1')}.amazonaws.com`,
-      },
-      settings: {
-        defaultFrom: env('AWS_SES_FROM'),
-        defaultReplyTo: env('AWS_SES_REPLY_TO'),
+        s3Options: {
+          credentials: {
+            accessKeyId: env('S3_ACCESS_KEY'),
+            secretAccessKey: env('S3_ACCESS_SECRET'),
+          },
+          endpoint: env('S3_ENDPOINT'),
+          region: env('S3_REGION'),
+          params: {
+            Bucket: env('S3_BUCKET'),
+          },
+          forcePathStyle: true // Wichtig für S3-kompatible Dienste
+        }
       },
     },
   },
