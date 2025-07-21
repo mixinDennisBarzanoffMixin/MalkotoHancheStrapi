@@ -13,9 +13,14 @@ module.exports = ({ env }) => ({
           params: {
             Bucket: env('S3_BUCKET'),
           },
-          forcePathStyle: true // Wichtig für S3-kompatible Dienste
+          forcePathStyle: true
         }
       },
+      actionOptions: {
+        upload: {},
+        uploadStream: {},
+        delete: {},
+      }
     },
   },
 });
