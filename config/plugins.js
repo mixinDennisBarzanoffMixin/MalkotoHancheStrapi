@@ -1,7 +1,7 @@
 module.exports = ({ env }) => ({
   upload: {
     config: {
-      provider: 'strapi-provider-upload-aws-s3',
+      provider: '@strapi/provider-upload-aws-s3',
       providerOptions: {
         s3Options: {
           credentials: {
