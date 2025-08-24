@@ -34,13 +34,13 @@ async function sendTwillio(order, toNumber) {
           from: fromNumber,
           to: toNumber
         });
-        strapi.log.info('Call initiated successfully:', call.sid);
+        console.log('Call initiated successfully:', call.sid);
       } catch (error) {
-        strapi.log.error('Failed to make call:', error.message);
+        console.error('Failed to make call:', error.message);
         // Wir lassen den Prozess weiterlaufen, auch wenn der Anruf fehlschlägt
       }
     } catch (error) {
-      strapi.log.error('Twilio notification error:', error);
+      console.error('Twilio notification error:', error);
       // Wir werfen den Fehler nicht weiter, damit die E-Mail-Benachrichtigung nicht beeinträchtigt wird
     }
 }
