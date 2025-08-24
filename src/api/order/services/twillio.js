@@ -5,7 +5,7 @@ async function sendTwillio(order, toNumber) {
       const authToken = process.env.TWILIO_AUTH_TOKEN;
       const fromNumber = process.env.TWILIO_PHONE_NUMBER;
       
-      strapi.log.debug('Twilio credentials:', {
+      console.log('Twilio credentials:', {
         accountSid,
         fromNumber
       });
