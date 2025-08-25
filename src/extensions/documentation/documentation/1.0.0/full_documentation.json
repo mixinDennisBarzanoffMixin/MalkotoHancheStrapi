@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "title": "Strapi API Documentation",
-    "description": "Documentation for the Strapi API",
+    "title": "DOCUMENTATION",
+    "description": "",
     "termsOfService": "YOUR_TERMS_OF_SERVICE_URL",
     "contact": {
       "name": "TEAM",
@@ -14,20 +14,20 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-07-17T10:09:39.143Z"
+    "x-generation-date": "2025-08-25T11:38:56.229Z"
   },
-  "servers": [
-    {
-      "url": "http://localhost:1337",
-      "description": "Development server"
-    }
-  ],
   "x-strapi-config": {
     "plugins": [
       "upload",
       "users-permissions"
     ]
   },
+  "servers": [
+    {
+      "url": "http://localhost:1337/api",
+      "description": "Development server"
+    }
+  ],
   "externalDocs": {
     "description": "Find out more",
     "url": "https://docs.strapi.io/developer-docs/latest/getting-started/introduction.html"

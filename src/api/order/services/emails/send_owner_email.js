@@ -1,3 +1,5 @@
+const { attachBaseUrlIfOnlyPath } = require("../util");
+
 async function sendOwnerEmail(order, ownerEmail) {
     await strapi.plugins['email'].services.email.send({
       to: ownerEmail,
@@ -68,8 +70,8 @@ async function sendOwnerEmail(order, ownerEmail) {
                 return `
                   <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 15px; background-color: #ffffff;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                      ${product.image?.formats?.thumbnail ?? product.imageUrl ? `
-                        <img src="https://admin.malkotohanche.com${product.image?.formats?.thumbnail?.url ?? product.imageUrl}" 
+                      ${product.image?.formats?.thumbnail?.url ?? product.imageUrl ? `
+                        <img src="${attachBaseUrlIfOnlyPath(product.image?.formats?.thumbnail?.url ?? product.imageUrl)}" 
                              alt="${product.name}" 
                              style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; margin-right: 15px;"
                         />
