@@ -1,9 +1,13 @@
+const EUR_RATE = 1.95583;
+const toEUR = (bgn) => Number(bgn) / EUR_RATE;
+const formatBGNandEUR = (bgn) => `${Number(bgn).toFixed(2)}лв (${toEUR(bgn).toFixed(2)}€)`;
+
 async function sendCustomerEmail(order) {
     await strapi.plugins['email'].services.email.send({
       to: order.customerEmail,
       from: process.env.AWS_SES_FROM,
       subject: `Поръчка номер ${order.orderNumber} е потвърдена`,
-      text: `Благодарим ви за вашата поръчка!\n\nПоръчка номер: ${order.orderNumber}\nОбща сума: ${order.totalAmount}лв`,
+      text: `Благодарим ви за вашата поръчка!\n\nПоръчка номер: ${order.orderNumber}\nОбща сума: ${formatBGNandEUR(order.totalAmount)}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #374151; background-color: #f9fafb; margin: 0; padding: 20px;">
           <div style="max-width: 650px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
@@ -47,7 +51,7 @@ async function sendCustomerEmail(order) {
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                   <span style="font-weight: 500; color: #64748b;">Обща сума:</span>
-                  <span style="font-weight: 600; color: #1e293b;">${order.totalAmount.toFixed(2)}лв</span>
+                  <span style="font-weight: 600; color: #1e293b;">${formatBGNandEUR(order.totalAmount)}</span>
                 </div>
                 
                 ${order.paymentMethod ? `
@@ -91,21 +95,21 @@ async function sendCustomerEmail(order) {
                       <div style="text-align: right;">
                         ${hasDiscount ? `
                           <div>
-                            <span style="font-size: 14px; color: #9ca3af; text-decoration: line-through; margin-right: 8px;">${regularPrice.toFixed(2)}лв</span>
-                            <span style="font-size: 18px; font-weight: 700; color: #dc2626;">${currentPrice.toFixed(2)}лв</span>
+                            <span style="font-size: 14px; color: #9ca3af; text-decoration: line-through; margin-right: 8px;">${formatBGNandEUR(regularPrice)}</span>
+                            <span style="font-size: 18px; font-weight: 700; color: #dc2626;">${formatBGNandEUR(currentPrice)}</span>
                           </div>
                         ` : `
-                          <span style="font-size: 18px; font-weight: 700; color: #1e293b;">${currentPrice.toFixed(2)}лв</span>
+                          <span style="font-size: 18px; font-weight: 700; color: #1e293b;">${formatBGNandEUR(currentPrice)}</span>
                         `}
                       </div>
                     </div>
 
                     <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f8fafc; padding: 12px 16px; border-radius: 8px;">
                       <span style="font-size: 16px; color: #64748b;">Количество: ${item.quantity} бр.</span>
-                      <span style="font-size: 16px; font-weight: 600; color: #1e293b;">Сума: ${itemTotal.toFixed(2)}лв</span>
+                      <span style="font-size: 16px; font-weight: 600; color: #1e293b;">Сума: ${formatBGNandEUR(itemTotal)}</span>
                       ${savings > 0 ? `
                         <span style="color: #16a34a; font-weight: 600;">
-                          Спестени: ${savings.toFixed(2)}лв
+                          Спестени: ${formatBGNandEUR(savings)}
                         </span>
                       ` : ''}
                     </div>
@@ -126,7 +130,7 @@ async function sendCustomerEmail(order) {
                   return `
                     <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 16px;">
                       <span>${item.product.name} x${item.quantity}</span>
-                      <span>${itemTotal.toFixed(2)}лв</span>
+                      <span>${formatBGNandEUR(itemTotal)}</span>
                     </div>
                   `;
                 }).join('')}
@@ -134,18 +138,18 @@ async function sendCustomerEmail(order) {
                 <div style="border-top: 2px solid rgba(255, 255, 255, 0.2); margin: 15px 0; padding-top: 15px;">
                   <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 16px;">
                     <span>Междинна сума:</span>
-                    <span>${(order.totalAmount - order.shippingCost).toFixed(2)}лв</span>
+                    <span>${formatBGNandEUR(order.totalAmount - order.shippingCost)}</span>
                   </div>
                   
                   <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 16px;">
                     <span>Доставка:</span>
-                    <span>${order.shippingCost.toFixed(2)}лв</span>
+                    <span>${formatBGNandEUR(order.shippingCost)}</span>
                   </div>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255, 255, 255, 0.2); font-size: 24px; font-weight: 700;">
                   <span>ОБЩО ЗА ПЛАЩАНЕ:</span>
-                  <span>${order.totalAmount.toFixed(2)}лв</span>
+                  <span>${formatBGNandEUR(order.totalAmount)}</span>
                 </div>
               </div>
 
@@ -168,7 +172,7 @@ async function sendCustomerEmail(order) {
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                   <span style="font-weight: 500; color: #64748b;">Цена за доставка:</span>
-                  <span style="font-weight: 600; color: #1e293b;">${order.shippingCost.toFixed(2)}лв</span>
+                  <span style="font-weight: 600; color: #1e293b;">${formatBGNandEUR(order.shippingCost)}</span>
                 </div>
                 ${order.estimatedDelivery ? `
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">

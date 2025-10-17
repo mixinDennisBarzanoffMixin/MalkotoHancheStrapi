@@ -1,11 +1,15 @@
+/* global strapi */
 const { attachBaseUrlIfOnlyPath } = require("../util");
+const EUR_RATE = 1.95583;
+const toEUR = (bgn) => Number(bgn) / EUR_RATE;
+const formatBGNandEUR = (bgn) => `${Number(bgn).toFixed(2)}лв (${toEUR(bgn).toFixed(2)}€)`;
 
 async function sendOwnerEmail(order, ownerEmail) {
-    await strapi.plugins['email'].services.email.send({
+    await global.strapi.plugins['email'].services.email.send({
       to: ownerEmail,
       from: process.env.AWS_SES_FROM,
       subject: `Поръчка номер ${order.orderNumber}`,
-      text: `Преглед на вашата поръчка!\n\nПоръчка номер: ${order.orderNumber}\nОбща сума: ${order.totalAmount}€`,
+      text: `Преглед на вашата поръчка!\n\nПоръчка номер: ${order.orderNumber}\nОбща сума: ${formatBGNandEUR(order.totalAmount)}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #374151; background-color: #f9fafb; margin: 0; padding: 20px;">
           <div style="max-width: 800px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
@@ -30,7 +34,7 @@ async function sendOwnerEmail(order, ownerEmail) {
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap;">
                   <span style="font-weight: 500; color: #6b7280; min-width: 120px;">Обща сума:</span>
-                  <span style="font-weight: 600; color: #1f2937;">${order.totalAmount.toFixed(2)}лв</span>
+                  <span style="font-weight: 600; color: #1f2937;">${formatBGNandEUR(order.totalAmount)}</span>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap;">
@@ -79,10 +83,10 @@ async function sendOwnerEmail(order, ownerEmail) {
                       <h3 style="font-size: 18px; font-weight: 600; color: #1f2937; margin: 0; flex: 1; min-width: 200px;">${product.name}</h3>
                       <div style="text-align: right;">
                         ${hasDiscount ? `
-                          <span style="font-size: 14px; color: #9ca3af; text-decoration: line-through; margin-right: 8px;">${regularPrice.toFixed(2)}лв</span>
-                          <span style="font-size: 18px; font-weight: 700; color: #059669;">${product.oldPrice.toFixed(2)}лв</span>
+                          <span style="font-size: 14px; color: #9ca3af; text-decoration: line-through; margin-right: 8px;">${formatBGNandEUR(regularPrice)}</span>
+                          <span style="font-size: 18px; font-weight: 700; color: #059669;">${formatBGNandEUR(product.oldPrice)}</span>
                         ` : `
-                          <span style="font-size: 18px; font-weight: 700; color: #1f2937;">${regularPrice.toFixed(2)}лв</span>
+                          <span style="font-size: 18px; font-weight: 700; color: #1f2937;">${formatBGNandEUR(regularPrice)}</span>
                         `}
                       </div>
                     </div>
@@ -94,7 +98,7 @@ async function sendOwnerEmail(order, ownerEmail) {
                       </div>
                       <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6;">
                         <span style="font-weight: 500; color: #6b7280;">Сума за ред:</span>
-                        <span style="font-weight: 600; color: #1f2937;">${itemTotal.toFixed(2)}лв</span>
+                        <span style="font-weight: 600; color: #1f2937;">${formatBGNandEUR(itemTotal)}</span>
                       </div>
                       ${product.id ? `
                         <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f3f4f6;">
@@ -135,7 +139,7 @@ async function sendOwnerEmail(order, ownerEmail) {
 
                   <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
                     <span style="font-weight: 500; color: #6b7280;">Цена за доставка:</span>
-                    <span style="font-weight: 600; color: #1f2937;">${order.shippingCost.toFixed(2)}лв</span>
+                    <span style="font-weight: 600; color: #1f2937;">${formatBGNandEUR(order.shippingCost)}</span>
                   </div>
 
                   ${order.deliveryNotes ? `
@@ -160,14 +164,14 @@ async function sendOwnerEmail(order, ownerEmail) {
                   return `
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 16px;">
                       <span>${item.product.name} x${item.quantity}</span>
-                      <span>${itemTotal.toFixed(2)}лв</span>
+                      <span>${formatBGNandEUR(itemTotal)}</span>
                     </div>
                   `;
                 }).join('')}
                 
                 <div style="display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 2px solid rgba(255, 255, 255, 0.3); font-size: 20px; font-weight: 700;">
                   <span>ОБЩО:</span>
-                  <span>${order.totalAmount.toFixed(2)}лв</span>
+                  <span>${formatBGNandEUR(order.totalAmount)}</span>
                 </div>
               </div>
 
