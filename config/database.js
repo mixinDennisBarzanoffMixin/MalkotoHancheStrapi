@@ -2,6 +2,21 @@ const path = require('path');
 
 module.exports = ({ env }) => {
   const client = env('DATABASE_CLIENT', 'sqlite');
+  const isProduction = env('NODE_ENV') === 'production';
+
+  // Railway and most managed Postgres have limited connections (often 20).
+  // Use a small pool to avoid exhausting the database connection limit.
+  // Longer timeouts for production: Railway/other hosts may put DBs to sleep;
+  // the first connection can take 60–90+ seconds while the DB wakes up.
+  const postgresPool = isProduction
+    ? {
+        min: 0,
+        max: 5,
+        acquireTimeoutMillis: 120000,
+        createTimeoutMillis: 90000,
+        idleTimeoutMillis: 30000,
+      }
+    : { min: 0, max: 10 };
 
   const connections = {
     mysql: {
@@ -43,7 +58,7 @@ module.exports = ({ env }) => {
             },
             schema: env('DATABASE_SCHEMA', 'public'),
           },
-      pool: { min: 0, max: 50 },
+      pool: postgresPool,
     },
     sqlite: {
       connection: {
@@ -58,7 +73,7 @@ module.exports = ({ env }) => {
     connection: {
       client,
       ...connections[client],
-      acquireConnectionTimeout: 300000,
+      acquireConnectionTimeout: 120000,
     },
   };
 };
