@@ -31,7 +31,8 @@ module.exports = ({ env }) => ([
     name: 'strapi::cors',
     config: {
       origin: [
-        env('PUBLIC_URL'),
+        env('PUBLIC_URL') ||
+          (env('RAILWAY_PUBLIC_DOMAIN') ? `https://${env('RAILWAY_PUBLIC_DOMAIN')}` : null),
         env.array('CORS_ORIGINS', [
           'https://www.malkotohanche.com',
           'https://malkotohanche.com',

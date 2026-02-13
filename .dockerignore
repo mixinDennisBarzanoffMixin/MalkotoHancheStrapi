@@ -13,13 +13,16 @@ strapi_data
 .DS_Store
 *.log
 
-# Development
+# Development & secrets (Railway injects vars at runtime)
 .git
 .gitignore
+.env
+.env.*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+RAILWAY_SETUP.md
 
 # Build files
 build
