@@ -27,7 +27,23 @@ module.exports = ({ env }) => ([
       },
     },
   },
-  'strapi::cors',
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: [
+        env('PUBLIC_URL'),
+        env.array('CORS_ORIGINS', [
+          'https://www.malkotohanche.com',
+          'https://malkotohanche.com',
+        ]),
+      ]
+        .flat()
+        .filter(Boolean),
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      keepHeaderOnError: true,
+    },
+  },
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',
