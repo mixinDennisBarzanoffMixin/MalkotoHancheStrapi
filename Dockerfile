@@ -2,6 +2,11 @@ FROM node:22-bookworm-slim
 
 WORKDIR /srv/app
 
+# Slim image omits curl/unzip; both are needed for https://bun.sh/install
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates curl unzip \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install bun (works on Debian)
 RUN curl -fsSL https://bun.sh/install | bash && \
   mv /root/.bun/bin/bun /usr/local/bin/ && \
